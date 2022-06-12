@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from email.policy import default
 from pathlib import Path
 import os
+from unittest.mock import DEFAULT
 from django.conf import ENVIRONMENT_VARIABLE
 import environ
 env = environ.Env()
@@ -203,3 +204,13 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+if not DEBUG:
+    DEFAULT_FROM_EMAIL = 'Jorge Arteaga <mail@jlarteaga.com>'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST =  env('EMAIL_HOST')
+    EMAIL_PORT =  env('EMAIL_PORT')
+    EMAIL_HOST_USER =  env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD =  env('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_TLS =  env('EMAIL_USE_TLS')
