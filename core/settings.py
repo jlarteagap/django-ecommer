@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from email.policy import default
 from pathlib import Path
 import os
 from django.conf import ENVIRONMENT_VARIABLE
@@ -109,8 +110,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db("DATABASE_URL", default="postfres:///django")
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase', # This is where you put the name of the db file. 
+                 # If one doesn't exist, it will be created at migration time.
+    }
 }
+
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 CORS_ORIGING_WHITELIST = [
