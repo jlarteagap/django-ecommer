@@ -47,7 +47,9 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROJECT_APPS=[]
+PROJECT_APPS=[
+    'apps.user'
+]
 ECOMMERCE_APPS = []
 TRIRD_PARTY_APPS = [
     'corsheaders',
@@ -197,6 +199,8 @@ REEST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
+
+AUTH_USER_MODEL = 'user.UserAccount'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
